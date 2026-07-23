@@ -26,7 +26,7 @@
 **Engagement with reviewer's point:**
 
 ## Comment 6 — Rebase
-**What conflicted:**
+**What conflicted:** The rebase showed the conflict was in `models.py` within the `WatchlistEntry` model. The two branches defined `film_id` differently: one used a string UUID column, while the watchlist changes used an integer foreign-key column with an index.
 **How I resolved it:**
 **How I verified no conflict remains:**
 
