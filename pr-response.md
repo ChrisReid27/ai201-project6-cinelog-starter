@@ -8,8 +8,8 @@
 **How I verified:** I verified these changes by using the Find All References tool in VS Code, in the references tab I could see that all renaming was done everywhere in the project.
 
 ## Comment 2 — Deduplication
-**What I did:**
-**How I verified:**
+**What I did:** I reviewed the logic in the main branch for add_to_collection() within services/collection_service.py and compared it to what was the current set up in add_to_watchlist(). I added AlreadyInWatchlistError to services/watchlist_service.py which gets raised if after add_to_watchlist() checks for if an entryy already exists within it, the entry does. I also updated routes/watchlist/watchlist.py to return HTTP 409 for duplicates.
+**How I verified:** This fix once done was compared against the procedure in add_to_collection within service/collection_service.py and it matched up. The test suite was ran and all four passed, including the deduplication test. Syntax validity was confirmed with no errors after using compile all for the services and routes packages.
 
 ## Comment 3 — Missing test
 **What I did:**
