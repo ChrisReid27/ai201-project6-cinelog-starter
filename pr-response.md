@@ -17,13 +17,13 @@
 
 ## Comment 4 — Default visibility
 **My position:** I want to keep `public=True` as the default for new watchlist entries.
-**Reasoning:** This would be optimal for users who want to quickly share and discover film recommendations without needing extra visibility step for every item. The default makes watchlists useful as social, discoverable lists while still allowing the application to expose visibility controls where users would need them.
+**Reasoning:** This would be optimal for users who want to quickly share and discover film recommendations without needing the extra visibility step for every item. The default makes watchlists useful as social, discoverable lists while still allowing the application to expose visibility controls where users would need them.
 **Tradeoff acknowledged:** The tradeoff is having the default be private, which would mean stronger privacy for users and that users explicitly opt in to sharing. I say no to this because it would make new watchlists less useful for discovery until users change the setting. Keeping the setting default as public is intentional, it will provide users with easier sharing and increase their engagement with the system. Changing the visibility to private is still an option the user can choose.
 
 ## Comment 5 — Sort order
-**My position:**
-**Reasoning:**
-**Engagement with reviewer's point:**
+**My position:** I think that watchlists should default to date added rather than alphabetical.
+**Reasoning:** Date added, with the most recently added at the top, is more immediately understandable to users. It's the most relevant item they interacted with whenever they used the system last and their watchlist entry should reflect that.
+**Engagement with reviewer's point:** I agree with this point and support the suggestion. If a film they add starts with J, they might be scrolling through their potentially long watchlist to find it when instead, it could be at the top of the list. Users will also be given the option to switch to alphabetical view if they so choose, as well as date added in the opposite direction, as in earliest first.
 
 ## Comment 6 — Rebase
 **What conflicted:**
