@@ -16,9 +16,9 @@
 **How I verified:** I ran this test with pytest tests/test_watchlist.py -v in which it passed. All tests (ran with pytest tests/ -v) still pass with this recent addition.
 
 ## Comment 4 — Default visibility
-**My position:**
-**Reasoning:**
-**Tradeoff acknowledged:**
+**My position:** I want to keep `public=True` as the default for new watchlist entries.
+**Reasoning:** This would be optimal for users who want to quickly share and discover film recommendations without needing extra visibility step for every item. The default makes watchlists useful as social, discoverable lists while still allowing the application to expose visibility controls where users would need them.
+**Tradeoff acknowledged:** The tradeoff is having the default be private, which would mean stronger privacy for users and that users explicitly opt in to sharing. I say no to this because it would make new watchlists less useful for discovery until users change the setting. Keeping the setting default as public is intentional, it will provide users with easier sharing and increase their engagement with the system. Changing the visibility to private is still an option the user can choose.
 
 ## Comment 5 — Sort order
 **My position:**
