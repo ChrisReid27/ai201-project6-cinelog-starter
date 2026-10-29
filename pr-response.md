@@ -8,12 +8,12 @@
 **How I verified:** I verified these changes by using the Find All References tool in VS Code, in the references tab I could see that all renaming was done everywhere in the project.
 
 ## Comment 2 — Deduplication
-**What I did:** I reviewed the logic in the main branch for add_to_collection() within services/collection_service.py and compared it to what was the current set up in add_to_watchlist(). I added AlreadyInWatchlistError to services/watchlist_service.py which gets raised if after add_to_watchlist() checks for if an entryy already exists within it, the entry does. I also updated routes/watchlist/watchlist.py to return HTTP 409 for duplicates.
-**How I verified:** This fix once done was compared against the procedure in add_to_collection within service/collection_service.py and it matched up. The test suite was ran and all four passed, including the deduplication test. Syntax validity was confirmed with no errors after using compile all for the services and routes packages.
+**What I did:** I reviewed the logic for add_to_collection() within services/collection_service.py and compared it to what was the current set up in add_to_watchlist(). I added AlreadyInWatchlistError to services/watchlist_service.py and I also updated routes/watchlist/watchlist.py to return HTTP 409 for duplicates. Now, the add_to_collection() pattern reference correctly checks whether an entry already exists for the same user_id and film_id and when a duplicate is found, it raises AlreadyInCollectionError instead of creating or committing another collection entry.
+**How I verified:** This fix once done was compared against the procedure in add_to_collection within service/collection_service.py and it matched up. Syntax validity was confirmed with no errors after using compile all for the services and routes packages.
 
 ## Comment 3 — Missing test
-**What I did:**
-**How I verified:**
+**What I did:** I examined test_collection.py's test_add_to_collection_nonexistent_film_raises test and made a new file called test_collection.py. In it I made an equivalent test for the watchlist service. Similar to the collection version, test_add_to_watchlist_nonexistent_film_raises tests if the system correctly raises the FilmNoTFound error when a user tries to add a film id that doesn't exist to their watchlist before the watchlist entry is made. The fake_film_id is "00000000-0000-0000-0000-000000000000" and when entered as an id for a watchlist addition, will trigger the FilmNotFound error.
+**How I verified:** I ran this test with pytest tests/test_watchlist.py -v in which it passed. All tests (ran with pytest tests/ -v) still pass with this recent addition.
 
 ## Comment 4 — Default visibility
 **My position:**
