@@ -1,7 +1,7 @@
 # PR Response Doc — CineLog Watchlist Feature
 
 ## AI Usage
-<!-- Fill in at the end — how you used AI tools during this project -->
+I used Copilot AI to help identify and rename the watchlist service helper, implement duplicate detection and HTTP 409 handling, create the equivalent nonexistent/missing-film test, reason about the public=True visibility default and its privacy tradeoff, change watchlist sorting to newest date added by default while supporting earliest-first and alphabetical alternatives, resolve the UUID conflict during the rebase, and inspect commit history for merge commits and conventional-commit structure.
 
 ## Comment 1 — Rename
 **What I did:** I renamed the watchlist service helper to add_to_watchlist() in services/watchlist_service.py and routes/watchlist/watchlist.py. There were three references of saved_to_watchlist() that got changed.
@@ -60,3 +60,6 @@ The watchlist feature lets a user save films they want to watch and retrieve the
    ```
    Confirm the first returns earliest-first order and the second returns alphabetical title order.
 6. Submit a nonexistent film UUID and confirm the add request returns HTTP 404 rather than creating a watchlist entry.
+
+## Screenshot
+![git log screenshot of commits](<Screenshot 2026-10-31 154448.png>)
