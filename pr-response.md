@@ -31,4 +31,32 @@
 **How I verified no conflict remains:** I searched the resolved files for merge-conflict markers, ran Python syntax checks on the affected modules, and then checked the branch history with git log --merges. The working tree is clean and no merge commits remain in the feature/watchlist history.
 
 ## PR Description
-<!-- Written at the end — feature overview, design decisions, manual testing steps -->
+### Feature overview
+The watchlist feature lets a user save films they want to watch and retrieve their saved films through the watchlist service and API. Adding a film validates that the film UUID exists, prevents duplicate entries for the same user and film, and returns a conflict response when a duplicate is submitted. Watchlists include each film's `date_added` and visibility metadata. Errors are raised if a film that doesn't exist is attempted to be added to a watchlist by a user.
+
+### Design decisions
+- **Visibility default:** New watchlist entries default to `public=True`. This prioritizes easy sharing and film discovery, while acknowledging that private-by-default would better protect users who have not explicitly opted in to sharing.
+- **Sort order:** Watchlists default to newest `date_added` first because recently added films are most relevant to the user. Clients can request `date_added_asc` for earliest-first order or `alphabetical` for title order.
+
+### Manual testing steps
+1. Start the application with `python app.py` and ensure the database has a valid user UUID and film UUID, using the seeded data or the local database.
+2. Add a film to a user's watchlist:
+   ```bash
+   curl -X POST http://localhost:5000/watchlist/<user_uuid>/add ^
+     -H "Content-Type: application/json" ^
+     -d "{\"film_id\":\"<film_uuid>\"}"
+   ```
+   Confirm the response is HTTP 201 and includes the film UUID, `date_added`, and `public: true`.
+3. Repeat the same POST request. Confirm the response is HTTP 409 and reports that the film is already in the user's watchlist.
+4. Request the watchlist:
+   ```bash
+   curl http://localhost:5000/watchlist/<user_uuid>
+   ```
+   Confirm entries are returned newest-first by `date_added`.
+5. Test the alternate sort orders:
+   ```bash
+   curl "http://localhost:5000/watchlist/<user_uuid>?sort_by=date_added_asc"
+   curl "http://localhost:5000/watchlist/<user_uuid>?sort_by=alphabetical"
+   ```
+   Confirm the first returns earliest-first order and the second returns alphabetical title order.
+6. Submit a nonexistent film UUID and confirm the add request returns HTTP 404 rather than creating a watchlist entry.
