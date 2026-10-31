@@ -26,9 +26,9 @@
 **Engagement with reviewer's point:** I agree with this point and support the suggestion. If a film they add starts with J, they might be scrolling through their potentially long watchlist to find it when instead, it could be at the top of the list. Users will also be given the option to switch to alphabetical view if they so choose, as well as date added in the opposite direction, as in earliest first.
 
 ## Comment 6 — Rebase
-**What conflicted:**
-**How I resolved it:**
-**How I verified no conflict remains:**
+**What conflicted:** I fetched the updated main branch and rebased feature/watchlist onto origin/main. The rebase conflicted in models.py (and also in .gitignore and pr-response.md but those conflicts were very minor) because the WatchlistEntry.film_id column was defined as a UUID string on main but as an integer in the watchlist changes.
+**How I resolved it:** I kept the UUID definition to match the post-refactor Film.id type, removed the conflict markers, and updated the watchlist service and route documentation so they refer to film UUIDs rather than integer IDs.
+**How I verified no conflict remains:** I searched the resolved files for merge-conflict markers, ran Python syntax checks on the affected modules, and then checked the branch history with git log --merges. The working tree is clean and no merge commits remain in the feature/watchlist history.
 
 ## PR Description
 <!-- Written at the end — feature overview, design decisions, manual testing steps -->
